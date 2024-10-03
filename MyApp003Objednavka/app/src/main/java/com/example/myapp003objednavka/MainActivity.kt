@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         title = "Objednávka kosmetických předmětů"
 
         //nastavení obsluhy tlačítka "objednat"
-
         binding.btObjednavka.setOnClickListener {
+
             //načtení ID vybraného radioButton z radioGroup
             val cosmeticRbId = binding.rgCosmetic.checkedRadioButtonId
 
@@ -43,6 +43,17 @@ class MainActivity : AppCompatActivity() {
                     (if(stattrak) "; počítadlo pro kamarády" else "") + (if(batSca) "; battle scared" else "")
 
             binding.tvShrnuti.text = objednavkaText
+        }
+
+        //změna obrázku v závislosti na výběru radioButtonu
+        binding.rbAWP.setOnClickListener {
+            binding.ivSkin.setImageResource(R.drawable.awp)
+        }
+        binding.rbAK.setOnClickListener {
+            binding.ivSkin.setImageResource(R.drawable.ak)
+        }
+        binding.rbM4.setOnClickListener {
+            binding.ivSkin.setImageResource(R.drawable.m4)
         }
     }
 }
