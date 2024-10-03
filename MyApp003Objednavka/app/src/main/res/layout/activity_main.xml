@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,12 +10,74 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvNadpis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Jaký kosmetický předmět ve hře si chceš vybrat"
+        android:orientation="horizontal" />
+    <RadioGroup
+        android:id="@+id/rgCosmetic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <RadioButton
+      android:id="@+id/rbAWP"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="AWP - chrome"
+      android:checked="true"/>
+
+    <RadioButton
+        android:id="@+id/rbAK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AK - inherence"/>
+
+    <RadioButton
+        android:id="@+id/rbM4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M4 - lotus"/>
+
+    </RadioGroup>
+
+    <CheckBox
+    android:id="@+id/cbFactoryNew"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Nejlepší vzhled"/>
+
+    <CheckBox
+        android:id="@+id/cbStattrak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Počítadlo pro kamarády"/>
+
+    <CheckBox
+        android:id="@+id/cbBattleScared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nejhorší vzhled"/>
+
+    <Button
+        android:id="@+id/btObjednavka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Objednat kosmetický předmět"/>
+
+    <TextView
+        android:id="@+id/tvShrnuti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Souhrn objednávky:"/>
+
+    <ImageView
+        android:id="@+id/ivSkin"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/awp"
+        android:scaleType="centerInside"
+
 
 </LinearLayout>
