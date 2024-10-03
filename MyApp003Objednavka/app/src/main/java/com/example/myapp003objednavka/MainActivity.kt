@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             val objednavkaText = "Souhrn objednávky: " + "${cosmetic.text}" + (if(facNew) "; factory new" else "") +
                     (if(stattrak) "; počítadlo pro kamarády" else "") + (if(batSca) "; battle scared" else "")
 
+            //vypsání souhrnu objednávky
             binding.tvShrnuti.text = objednavkaText
         }
 
