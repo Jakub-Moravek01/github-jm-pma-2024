@@ -5,25 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondActivity"
+    tools:context=".MainActivity"
     android:orientation="vertical"
     android:padding="16sp">
 
-    <TextView
-        android:id="@+id/tvInfo"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/etNickname"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Druhá aktivita: "/>
+        android:hint="Vyplňte přezdívku"/>
 
     <Button
-        android:id="@+id/btnThird"
+        android:id="@+id/btnSecond"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Třetí aktivita"/>
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zavřít aktivitu"/>
+        android:text="Odeslat data"/>
+
+
 
 </LinearLayout>
