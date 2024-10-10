@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeExample()
+            ComposePerson()
         }
     }
 }
@@ -35,7 +35,7 @@ veškerou logiku a UI pro tuto jednoduchou aplikaci.
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComposeExample() {
+fun ComposePerson() {
 
     /*
     První řádek inicializuje stav
@@ -65,7 +65,7 @@ fun ComposeExample() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Moje Aplikace", color = Color.White) }, // Nastaví barvu textu na bílou
+                title = { Text("Moje Aplikace - Osoba", color = Color.White) }, // Nastaví barvu textu na bílou
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color.DarkGray,  // Nastaví pozadí na černé
                     //titleContentColor = Color.White // Nastaví barvu textu na bílou
@@ -122,7 +122,8 @@ fun ComposeExample() {
                         resultText = "Jmenuji se $name $surname. Je mi $age let a moje bydliště je $place."
                     },
                     modifier = Modifier.weight(1f)
-                ) {
+                )
+                 {
                     Text("Odeslat")
                 }
 
@@ -161,5 +162,5 @@ fun ComposeExample() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ComposeExample()
+    ComposePerson()
 }
