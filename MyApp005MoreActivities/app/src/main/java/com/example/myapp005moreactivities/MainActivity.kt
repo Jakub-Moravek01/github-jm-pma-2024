@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         //enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        title = "Zkouška spouštění aktivit"
+
         val btnSecond = findViewById<Button>(R.id.btnSecond)
         val etNickname = findViewById<EditText>(R.id.etNickname)
 
