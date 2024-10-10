@@ -142,7 +142,7 @@ fun ComposePerson() {
             ) {
                 Button(
                     onClick = {
-                        resultText = "Jmenuji se $name $surname. Je mi $age let a moje bydliště je $place a můj domácí mazlíček je $pet."
+                        resultText = "Jmenuji se $name $surname. Je mi $age let a moje bydliště je $place a můj domácí mazlíček je $pet. Zadané číslo je $fav."
                     },
                     modifier = Modifier.weight(1f)
                 )
