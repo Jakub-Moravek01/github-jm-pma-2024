@@ -59,6 +59,7 @@ fun ComposePerson() {
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var age by remember { mutableStateOf("") }
+    var fav by remember { mutableStateOf("") }
     var place by remember { mutableStateOf("") }
     var pet by remember { mutableStateOf("") }
     var resultText by remember { mutableStateOf("") }
@@ -109,6 +110,17 @@ fun ComposePerson() {
                 },
                 label = { Text("Věk (hodnota menší než 151)") },
                 modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = fav,
+            onValueChange = {
+                // Omezíme vstup na číslice a kontrolujeme, že číslo není větší než 150
+                if (it.all { char -> char.isDigit() } && it.toIntOrNull()?.let { it <= 100 } == true) {
+                    fav = it
+                }
+            },
+            label = { Text("Zadejte číslo menší než 100") },
+            modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
                 value = place,
