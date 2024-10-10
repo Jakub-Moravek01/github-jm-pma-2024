@@ -6,42 +6,64 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapp004jetpackcompose.ui.theme.MyApp004JetpackComposeTheme
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            MyApp004JetpackComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            ComposePerson()
         }
     }
 }
 
+
+/*
+Tato funkce definuje samotnou Composable, což je funkce
+v Jetpack Compose, která vykresluje UI.
+V tomto případě bude tato funkce obsahovat
+veškerou logiku a UI pro tuto jednoduchou aplikaci.
+ */
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ComposePerson() {
+
+    // Přidáme Scaffold, abychom mohli přidat TopAppBar
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        "Moje Aplikace",
+                        color = Color.White
+                    )
+                }, // Nastaví barvu textu na bílou
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.DarkGray,  // Nastaví pozadí na černé
+                    //titleContentColor = Color.White // Nastaví barvu textu na bílou
+                )
+            )
+        }
+    ) {
+
+    }
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MyApp004JetpackComposeTheme {
-        Greeting("Android")
-    }
+fun DefaultPreview() {
+    ComposePerson()
 }
