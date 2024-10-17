@@ -10,16 +10,20 @@
 
 
     <Button
-        android:id="@+id/btnLeft"
+        android:id="@+id/btnShowSnackBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Levé tlačítko"
-        />
+        android:layout_marginTop="324dp"
+        android:text="SnackBar čudlík"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnRight"
+        android:id="@+id/btnShowToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pravé tlačítko"
-         />
+        android:layout_marginTop="324dp"
+        android:text="Toast čudlík"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
