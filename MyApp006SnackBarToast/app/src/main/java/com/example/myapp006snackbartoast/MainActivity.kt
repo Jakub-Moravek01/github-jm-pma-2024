@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         // Nastavení akce pro tlačítko toast
         binding.btnShowToast.setOnClickListener {
             val toast = Toast.makeText(this, "Nazdar - mám hlad", Toast.LENGTH_LONG)
+            toast.show()
         }
 
     }
