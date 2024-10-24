@@ -22,6 +22,7 @@
         android:layout_alignParentBottom="true"
         android:text="Fragment 1"
         android:textSize="20sp"/>
+
     <Button
         android:id="@+id/btnFragment2"
         android:layout_width="160sp"
