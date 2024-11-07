@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     var ScoreTextView: TextView? = null
     var AlertTextView: TextView? = null
     var FinalScoreTextView: TextView? = null
-    var PercentageTextView: TextView? = null // TextView pro procentuální skóre
+    var PercentageTextView: TextView? = null
     var btn0: Button? = null
     var btn1: Button? = null
     var btn2: Button? = null
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     var points = 0
     var totalQuestions = 0
     var cals = ""
+    var timeLimit = 10000L // Defaultní časový limit (10 sekund)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val calInt = intent.getStringExtra("cals")
         cals = calInt!!
+        timeLimit = intent.getLongExtra("timeLimit", 10000L) // Předání časového limitu z TimeSettingsActivity
         TimeTextView = findViewById(R.id.TimeTextView)
         QuestionTextText = findViewById(R.id.QuestionTextText)
         ScoreTextView = findViewById(R.id.ScoreTextView)
@@ -65,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                     "*" -> answers.add(a * b)
                     "/" -> {
                         try {
-                            // Ošetření dělení nulou
                             if (b == 0) {
                                 answers.add(a)
                             } else {
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                         wrongAnswer == a + b
                         || wrongAnswer == a - b
                         || wrongAnswer == a * b
-                        || (b != 0 && wrongAnswer == a / b) // Ošetření dělení nulou
+                        || (b != 0 && wrongAnswer == a / b)
                     ) {
                         wrongAnswer = random.nextInt(20)
                     }
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun start() {
         NextQuestion(cals)
-        countDownTimer = object : CountDownTimer(10000, 500) {
+        countDownTimer = object : CountDownTimer(timeLimit, 500) {
             override fun onTick(p0: Long) {
                 TimeTextView!!.text = (p0 / 1000).toString() + "s"
             }
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         val inflate = LayoutInflater.from(this)
         var winDialog = inflate.inflate(R.layout.win_layout, null)
         FinalScoreTextView = winDialog.findViewById(R.id.FinalScoreTextView)
-        PercentageTextView = winDialog.findViewById(R.id.PercentageTextView) // Nastavení pro procento
+        PercentageTextView = winDialog.findViewById(R.id.PercentageTextView)
         var btnPlayAgain = winDialog.findViewById<Button>(R.id.buttonPlayAgain)
         var btnBack = winDialog.findViewById<Button>(R.id.buttonBack)
 
@@ -145,7 +146,6 @@ class MainActivity : AppCompatActivity() {
         dialog.setCancelable(false)
         dialog.setView(winDialog)
 
-        // Výpočet procentuálního skóre
         val percentage = if (totalQuestions > 0) {
             ((points.toDouble() / totalQuestions) * 100).toInt()
         } else {
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         FinalScoreTextView!!.text = "$points/$totalQuestions"
-        PercentageTextView!!.text = "Procentuální úspěšnost: $percentage%" // Zobrazení procentuálního skóre
+        PercentageTextView!!.text = "Procentuální úspěšnost: $percentage%"
 
         btnPlayAgain.setOnClickListener {
             PlayAgain(it)
