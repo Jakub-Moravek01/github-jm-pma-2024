@@ -6,12 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import kotlinx.coroutines.NonCancellable.start
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     var ScoreTextView: TextView? = null
     var AlertTextView: TextView? = null
     var FinalScoreTextView: TextView? = null
+    var PercentageTextView: TextView? = null // TextView pro procentuální skóre
     var btn0: Button? = null
     var btn1: Button? = null
     var btn2: Button? = null
@@ -37,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
         val calInt = intent.getStringExtra("cals")
@@ -46,14 +42,12 @@ class MainActivity : AppCompatActivity() {
         QuestionTextText = findViewById(R.id.QuestionTextText)
         ScoreTextView = findViewById(R.id.ScoreTextView)
         AlertTextView = findViewById(R.id.AlertTextView)
-        //FinalScoreTextView = findViewById(R.id.FinalScoreTextView)
         btn0 = findViewById(R.id.button0)
         btn1 = findViewById(R.id.button1)
         btn2 = findViewById(R.id.button2)
         btn3 = findViewById(R.id.button3)
 
         start()
-
     }
 
     fun NextQuestion(cal: String) {
@@ -65,20 +59,18 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..3) {
             if (indexOfCorrectAnswer == i) {
-
                 when (cal) {
-                    "+" -> {
-                        answers.add(a + b)
-                    }
-                    "-" -> {
-                        answers.add(a - b)
-                    }
-                    "*" -> {
-                        answers.add(a * b)
-                    }
+                    "+" -> answers.add(a + b)
+                    "-" -> answers.add(a - b)
+                    "*" -> answers.add(a * b)
                     "/" -> {
                         try {
-                            answers.add(a / b)
+                            // Ošetření dělení nulou
+                            if (b == 0) {
+                                answers.add(a)
+                            } else {
+                                answers.add(a / b)
+                            }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -91,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                         wrongAnswer == a + b
                         || wrongAnswer == a - b
                         || wrongAnswer == a * b
-                        || wrongAnswer == a / b
+                        || (b != 0 && wrongAnswer == a / b) // Ošetření dělení nulou
                     ) {
                         wrongAnswer = random.nextInt(20)
                     }
@@ -101,14 +93,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        try {
-            btn0!!.text = "${answers[0]}"
-            btn1!!.text = "${answers[1]}"
-            btn2!!.text = "${answers[2]}"
-            btn3!!.text = "${answers[3]}"
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+
+        btn0!!.text = "${answers[0]}"
+        btn1!!.text = "${answers[1]}"
+        btn2!!.text = "${answers[2]}"
+        btn3!!.text = "${answers[3]}"
     }
 
     fun optionSelect(view: View?) {
@@ -121,7 +110,6 @@ class MainActivity : AppCompatActivity() {
         }
         ScoreTextView!!.text = "$points/$totalQuestions"
         NextQuestion(cals)
-
     }
 
     fun PlayAgain(view: View?) {
@@ -149,20 +137,33 @@ class MainActivity : AppCompatActivity() {
         val inflate = LayoutInflater.from(this)
         var winDialog = inflate.inflate(R.layout.win_layout, null)
         FinalScoreTextView = winDialog.findViewById(R.id.FinalScoreTextView)
-        val btnPlayAgain = winDialog.findViewById<Button>(R.id.buttonPlayAgain)
-        val btnBack = winDialog.findViewById<Button>(R.id.buttonBack)
-        var dialog = AlertDialog.Builder(this)
+        PercentageTextView = winDialog.findViewById(R.id.PercentageTextView) // Nastavení pro procento
+        var btnPlayAgain = winDialog.findViewById<Button>(R.id.buttonPlayAgain)
+        var btnBack = winDialog.findViewById<Button>(R.id.buttonBack)
+
+        val dialog = AlertDialog.Builder(this)
         dialog.setCancelable(false)
         dialog.setView(winDialog)
+
+        // Výpočet procentuálního skóre
+        val percentage = if (totalQuestions > 0) {
+            ((points.toDouble() / totalQuestions) * 100).toInt()
+        } else {
+            0
+        }
+
         FinalScoreTextView!!.text = "$points/$totalQuestions"
+        PercentageTextView!!.text = "Procentuální úspěšnost: $percentage%" // Zobrazení procentuálního skóre
+
         btnPlayAgain.setOnClickListener {
             PlayAgain(it)
         }
+
         btnBack.setOnClickListener {
             onBackPressed()
         }
-        val showDialog = dialog.create()
+
+        var showDialog = dialog.create()
         showDialog.show()
     }
-
 }

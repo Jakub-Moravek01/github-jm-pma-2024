@@ -35,6 +35,16 @@
         android:textSize="30sp"
         android:background="#FFE082"/>
 
+    <!-- Nový TextView pro procentuální hodnocení -->
+    <TextView
+        android:id="@+id/PercentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Procentuální úspěšnost: 0%"
+        android:layout_marginTop="20dp"
+        android:textColor="#9A1818"
+        android:textSize="24sp"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_gravity="center"
@@ -59,8 +69,5 @@
             android:backgroundTint="#84E5ED"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-
-
     </LinearLayout>
 </LinearLayout>
