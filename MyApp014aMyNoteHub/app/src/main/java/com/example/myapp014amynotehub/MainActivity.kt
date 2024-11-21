@@ -102,6 +102,11 @@ class MainActivity : AppCompatActivity() {
             Note(title = "Poznámka 3", content = "Obsah třetí poznámky")
         )
     }*/
-
+    private fun deleteNote(note: Note) {
+        lifecycleScope.launch {
+            database.noteDao().delete(note)  // Smazání poznámky z databáze
+            loadNotes()  // Aktualizace seznamu poznámek
+        }
+    }
 
 }
