@@ -29,22 +29,26 @@ class MainActivity : AppCompatActivity() {
         // Inicializace databáze
         database = NoteHubDatabaseInstance.getDatabase(this)
 
+        // Vložení výchozích kategorií a štítků do databáze
+        //insertDefaultCategories()
+        //insertDefaultTags()
+
         // Inicializace RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         //noteAdapter = NoteAdapter(getSampleNotes())
 
-        noteAdapter = NoteAdapter(emptyList()) // Inicializace s prázdným seznamem
-        binding.recyclerView.adapter = noteAdapter
-
-        binding.fabAddNote.setOnClickListener {
-            showAddNoteDialog()
-        }
+        //noteAdapter = NoteAdapter(emptyList()) // Inicializace s prázdným seznamem
+        //binding.recyclerView.adapter = noteAdapter
 
         // Vložení testovacích dat
         //insertSampleNotes()
 
         // Načtení poznámek z databáze
         loadNotes()
+
+        binding.fabAddNote.setOnClickListener {
+            showAddNoteDialog()
+        }
     }
 
     private fun showAddNoteDialog() {
@@ -77,7 +81,9 @@ class MainActivity : AppCompatActivity() {
     private fun loadNotes() {
         lifecycleScope.launch {
             database.noteDao().getAllNotes().collect { notes ->
-                noteAdapter = NoteAdapter(notes)
+                noteAdapter = NoteAdapter(notes, onDeleteClick = { note ->
+                    deleteNote(note)
+                })
                 binding.recyclerView.adapter = noteAdapter
             }
         }
