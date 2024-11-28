@@ -29,4 +29,12 @@ interface CategoryDao {
     // Najde kategorii podle jejího názvu
     @Query("SELECT * FROM category_table WHERE name = :name LIMIT 1")
     suspend fun getCategoryByName(name: String): Category?
+
+    // Najde kategorii podle ID
+    @Query("SELECT * FROM category_table WHERE id = :categoryId LIMIT 1")
+    suspend fun getCategoryById(categoryId: Int): Category?
+
+    // Vymaže všechny záznamy z tabulky
+    @Query("DELETE FROM category_table")
+    suspend fun deleteAllCategories()
 }
