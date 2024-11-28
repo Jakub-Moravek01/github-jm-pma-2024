@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Najdeme ID vybrané kategorie
                 lifecycleScope.launch {
-                    val category = database.categoryDao().getCategoryByName(selectedCategory)
+                    val category = database.categoryDao().getCategoryByName(selectedCategory) //tady změna
                     if (category != null) {
                         addNoteToDatabase(title, content, category.id)
                     }
@@ -103,9 +103,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             database.noteDao().getAllNotes().collect { notes ->
                 noteAdapter = NoteAdapter(
-                    notes,
+                    notes = notes,
                     onDeleteClick = { note -> deleteNote(note) },
-                    onEditClick = { note -> editNote(note) }
+                    onEditClick = { note -> editNote(note) },
+                    lifecycleScope = lifecycleScope,  // Předáváme lifecycleScope
+                    database = database  // Předáváme databázi
                 )
                 binding.recyclerView.adapter = noteAdapter
             }
