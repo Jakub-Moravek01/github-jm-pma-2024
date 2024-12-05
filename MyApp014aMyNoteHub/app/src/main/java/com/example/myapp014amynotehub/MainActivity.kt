@@ -170,10 +170,27 @@ class MainActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_note, null)
         val titleEditText = dialogView.findViewById<EditText>(R.id.editTextTitle)
         val contentEditText = dialogView.findViewById<EditText>(R.id.editTextContent)
+        val spinnerCategory = dialogView.findViewById<Spinner>(R.id.spinnerCategory)
 
         // Předvyplnění stávajících dat poznámky
         titleEditText.setText(note.title)
         contentEditText.setText(note.content)
+
+        // Načtení kategorií do Spinneru a přednastavení aktuální kategorie
+        lifecycleScope.launch {
+            val categories = database.categoryDao().getAllCategories().first()
+            val categoryNames = categories.map { it.name }
+            val adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, categoryNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategory.adapter = adapter
+
+            // Přednastavíme aktuální kategorii poznámky
+            val currentCategory = categories.find { it.id == note.categoryId }
+            val currentCategoryIndex = categories.indexOf(currentCategory)
+            if (currentCategoryIndex >= 0) {
+                spinnerCategory.setSelection(currentCategoryIndex)
+            }
+        }
 
         val dialog = AlertDialog.Builder(this)
             .setTitle("Upravit poznámku")
@@ -181,12 +198,20 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("Uložit") { _, _ ->
                 val updatedTitle = titleEditText.text.toString()
                 val updatedContent = contentEditText.text.toString()
+                val selectedCategoryName = spinnerCategory.selectedItem.toString()
 
-                // Aktualizace poznámky v databázi
+                // Najdeme ID vybrané kategorie
                 lifecycleScope.launch {
-                    val updatedNote = note.copy(title = updatedTitle, content = updatedContent)
-                    database.noteDao().update(updatedNote)  // Uloží aktualizovanou poznámku
-                    loadNotes()  // Načte a aktualizuje seznam poznámek
+                    val selectedCategory = database.categoryDao().getCategoryByName(selectedCategoryName)
+                    if (selectedCategory != null) {
+                        val updatedNote = note.copy(
+                            title = updatedTitle,
+                            content = updatedContent,
+                            categoryId = selectedCategory.id
+                        )
+                        database.noteDao().update(updatedNote)  // Uloží aktualizovanou poznámku
+                        loadNotes()  // Načte a aktualizuje seznam poznámek
+                    }
                 }
             }
             .setNegativeButton("Zrušit", null)
