@@ -52,12 +52,12 @@ class MainActivity : AppCompatActivity() {
         listenToTaskUpdates()
     }
 
-    private fun loadTasks() {
-        tasks.add(Task("1", "Buy groceries", isCompleted = false, assignedTo = "Alice"))
-        tasks.add(Task("2", "Clean the house", isCompleted = false, assignedTo = ""))
-        tasks.add(Task("3", "Prepare presentation", isCompleted = true, assignedTo = "Bob"))
-        taskAdapter.notifyDataSetChanged()
-    }
+   // private fun loadTasks() {
+    //    tasks.add(Task("1", "Buy groceries", isCompleted = false, assignedTo = "Alice"))
+    //    tasks.add(Task("2", "Clean the house", isCompleted = false, assignedTo = ""))
+    //    tasks.add(Task("3", "Prepare presentation", isCompleted = true, assignedTo = "Bob"))
+    //    taskAdapter.notifyDataSetChanged()
+    //}
 
     private fun updateTask(task: Task) {
         // Tady později napojíme Firestore update
