@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="@color/white">
 
-    <!-- App Title -->
+    <!-- Název aplikace -->
     <TextView
         android:id="@+id/tvAppTitle"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         android:textColor="@color/black"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Current Date -->
+    <!-- Výpis dnešního data -->
     <TextView
         android:id="@+id/tvCurrentDate"
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
         android:textColor="@color/black"
         android:layout_marginBottom="32dp"/>
 
-    <!-- otevření kalendáře -->
+    <!-- Otevření kalendáře -->
     <Button
         android:id="@+id/btnOpenCalendar"
         android:layout_width="wrap_content"
