@@ -7,4 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".AdventniKalendar">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- GridLayout pro 24 dny -->
+    <android.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+    android:rowCount="6"
+    android:layout_margin="16dp"
+    android:orientation="horizontal"
+    android:stretchMode="columnWidth"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/btnBack"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+</android.widget.GridLayout>
+
+    <!-- Tlačítko pro návrat na MainActivity -->
+<Button
+android:id="@+id/btnBack"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Zpět"
+android:layout_marginBottom="32dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

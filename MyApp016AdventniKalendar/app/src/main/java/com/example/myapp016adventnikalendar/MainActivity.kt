@@ -1,5 +1,6 @@
 package com.example.myapp016adventnikalendar
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp016adventnikalendar.databinding.ActivityMainBinding
@@ -23,8 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         // Nastavení akcí na tlačítka
         binding.btnOpenCalendar.setOnClickListener {
-            // Logika pro otevření kalendáře
+            // Otevře AdventniKalendar aktivitu
+            val intent = Intent(this, AdventniKalendar::class.java)
+            startActivity(intent)
         }
+
         binding.btnExitApp.setOnClickListener {
             finish() // Zavře aplikaci
         }
