@@ -1,20 +1,32 @@
 package com.example.myapp016adventnikalendar
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.myapp016adventnikalendar.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // Inicializace bindingu
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Nastavení aktuálního data
+        val currentDate = SimpleDateFormat("d. MMMM yyyy", Locale.getDefault()).format(Date())
+        binding.tvCurrentDate.text = "Datum: $currentDate"
+
+        // Nastavení akcí na tlačítka
+        binding.btnOpenCalendar.setOnClickListener {
+            // Logika pro otevření kalendáře
+        }
+        binding.btnExitApp.setOnClickListener {
+            finish() // Zavře aplikaci
         }
     }
 }

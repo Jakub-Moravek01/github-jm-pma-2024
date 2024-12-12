@@ -24,12 +24,12 @@
         android:id="@+id/tvCurrentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Datum: 12. prosince 2024"
+        android:text=""
         android:textSize="18sp"
         android:textColor="@color/black"
         android:layout_marginBottom="32dp"/>
 
-    <!-- Button to navigate to calendar -->
+    <!-- otevření kalendáře -->
     <Button
         android:id="@+id/btnOpenCalendar"
         android:layout_width="wrap_content"
@@ -37,17 +37,17 @@
         android:text="Otevřít kalendář"
         android:textSize="16sp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/green"
         android:textColor="@color/white"/>
 
-    <!-- Button to close the app -->
+    <!-- Zavření aplikace -->
     <Button
         android:id="@+id/btnExitApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Zavřít aplikaci"
         android:textSize="16sp"
-        android:backgroundTint="@color/secondaryColor"
+        android:backgroundTint="@color/red"
         android:textColor="@color/white"/>
 
 </LinearLayout>
