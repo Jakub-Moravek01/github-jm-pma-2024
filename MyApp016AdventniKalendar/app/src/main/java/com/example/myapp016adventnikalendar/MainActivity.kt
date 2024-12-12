@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnExitApp.setOnClickListener {
-            finish() // Zavře aplikaci
+            finishAffinity() // Zavře všechny aktivity a skutečně ukončí aplikaci
         }
+
     }
 }

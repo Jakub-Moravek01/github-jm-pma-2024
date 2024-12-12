@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.widget.Button
 import android.widget.GridLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp016adventnikalendar.databinding.ActivityAdventniKalendarBinding
 import com.example.myapp016adventnikalendar.databinding.ActivityMainBinding
@@ -38,6 +39,16 @@ class AdventniKalendar : AppCompatActivity() {
 
             // Přidání tlačítka do GridLayout
             binding.gridLayout.addView(button)
+
+            // Nastavení akcí pro tlačítka
+            button.setOnClickListener {
+                // Zobrazení toastu s číslem okénka
+                Toast.makeText(
+                    this,
+                    "Otevřel jsi okénko: $i",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         // Nastavení tlačítka pro návrat na MainActivity
