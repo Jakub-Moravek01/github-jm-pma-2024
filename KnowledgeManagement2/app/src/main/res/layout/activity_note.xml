@@ -13,7 +13,8 @@
         android:text="Odhlásit"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/red"/>
 
     <!-- RecyclerView pro seznam poznámek -->
     <androidx.recyclerview.widget.RecyclerView
@@ -35,5 +36,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/green"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
