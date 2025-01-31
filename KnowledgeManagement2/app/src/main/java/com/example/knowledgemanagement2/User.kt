@@ -1,4 +1,4 @@
-package com.example.knowledgemanagement
+package com.example.knowledgemanagement2
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
