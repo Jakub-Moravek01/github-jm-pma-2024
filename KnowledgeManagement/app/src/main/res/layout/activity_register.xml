@@ -66,9 +66,10 @@
         android:hint="Potvrdit heslo"
         android:inputType="textPassword"
         android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.7"
-        tools:layout_editor_absoluteX="62dp" />
+        app:layout_constraintWidth_percent="0.7" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -86,8 +87,8 @@
 
     <Spinner
         android:id="@+id/spinnerArea"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
+        android:layout_width="297dp"
+        android:layout_height="58dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
