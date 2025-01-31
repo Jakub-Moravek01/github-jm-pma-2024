@@ -1,5 +1,6 @@
 package com.example.knowledgemanagement2
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -15,41 +16,44 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inicializace View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializace databáze a DAO
         database = AppDatabase.getDatabase(this)
         userDao = database.userDao()
 
-        // Odkaz na registraci
         binding.btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        // Přihlášení
         binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.text.toString()
             val password = binding.etPassword.text.toString()
 
-            // Zkontrolujeme, jestli uživatel existuje v databázi
-            lifecycleScope.launch {
-                val user = userDao.getUserByUsername(username)
+            if (username.isNotBlank() && password.isNotBlank()) {
+                lifecycleScope.launch {
+                    val user = userDao.getUserByUsername(username)
 
-                if (user != null && user.password == password) {
-                    // Pokud uživatel existuje a heslo je správné, zobrazíme toast
-                    runOnUiThread {
-                        Toast.makeText(this@MainActivity, "Přihlášení úspěšné", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    // Pokud nejsou shody, ukážeme chybovou hlášku
-                    runOnUiThread {
-                        Toast.makeText(this@MainActivity, "Chybné přihlašovací údaje", Toast.LENGTH_SHORT).show()
+                    if (user != null && user.password == password) {
+                        val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                        with(sharedPreferences.edit()) {
+                            putString("USER_NAME", user.username)
+                            putString("USER_AREA", user.area)
+                            apply()
+                        }
+
+                        val intent = Intent(this@MainActivity, NoteActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        runOnUiThread {
+                            Toast.makeText(this@MainActivity, "Špatné přihlašovací údaje", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+            } else {
+                Toast.makeText(this, "Vyplňte všechna pole", Toast.LENGTH_SHORT).show()
             }
         }
     }
