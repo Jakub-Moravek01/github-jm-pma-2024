@@ -45,7 +45,7 @@ class NoteActivity : AppCompatActivity() {
         }
 
         binding.btnLogout.setOnClickListener {
-            finish()
+            logoutUser()
         }
 
         loadNotes()
@@ -135,5 +135,22 @@ class NoteActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    private fun logoutUser() {
+        val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+
+        // Smazání pouze uživatelských údajů, aby aplikace fungovala správně
+        with(sharedPreferences.edit()) {
+            remove("USER_NAME")
+            remove("USER_AREA")
+            apply()
+        }
+
+        // Přesměrování na MainActivity s vyčištěním aktivit
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }
